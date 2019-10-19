@@ -12,9 +12,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 
 // connecting to mongoDB
-mongoose.connect('https://localhost/mongodb/', {
+mongoose.connect('mongodb://localhost/url-shortener', {
   useNewUrlParser: true,
-  useCreateIndex: true
+  useCreateIndex: true,
+  useUnifiedTopology: true
 })
 const db = mongoose.connection
 db.on('error', () => {
@@ -26,4 +27,11 @@ db.once('open', () => {
 
 
 // setting routes
+app.get('/', (req, res) => {
+  res.render('index')
+})
 
+
+app.listen(3000, () => {
+  console.log('Server is listen to port 3000')
+})
