@@ -31,6 +31,12 @@ app.get('/', (req, res) => {
   res.render('index')
 })
 
+app.post('/', (req, res) => {
+  const inputUrl = req.body.inputUrl
+
+  res.render('result')
+})
+
 
 app.listen(3000, () => {
   console.log('Server is listen to port 3000')
