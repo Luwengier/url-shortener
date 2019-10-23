@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 
 // connecting to mongoDB
-mongoose.connect('mongodb://localhost/url-shortener', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/todo', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true
@@ -31,6 +31,6 @@ db.once('open', () => {
 app.use('/', require('./routes/home'))
 app.use('/', require('./routes/shorten'))
 
-app.listen(3000, () => {
-  console.log('Server is listen to port 3000')
+app.listen(process.env.PORT || 3000, () => {
+  console.log('App is running')
 })
