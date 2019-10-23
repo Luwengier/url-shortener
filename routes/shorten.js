@@ -19,9 +19,9 @@ router.post('/', (req, res) => {
   async function start() {
     try {
       let newUrlArr = await newUrls
-      let newUrl = 'http://localhost:3000/' + Math.random().toString(36).slice(-5)
+      let newUrl = 'http://localhost:3000/new/' + Math.random().toString(36).slice(-5)
       while (newUrlArr.includes(newUrl)) {
-        newUrl = 'http://localhost:3000/' + Math.random().toString(36).slice(-5)
+        newUrl = 'http://localhost:3000/new/' + Math.random().toString(36).slice(-5)
       }
       const newShorten = new Shorten({
         inputUrl: inputUrl,
@@ -39,8 +39,8 @@ router.post('/', (req, res) => {
   start()
 })
 
-router.get('/:newUrl', (req, res) => {
-  Shorten.findOne({ newUrl: ('http://localhost:3000/' + req.params.newUrl) }, (err, shorten) => {
+router.get('/new/:newUrl', (req, res) => {
+  Shorten.findOne({ newUrl: ('http://localhost:3000/new/' + req.params.newUrl) }, (err, shorten) => {
     if (err) console.error(err)
     res.redirect(`${shorten.inputUrl}`)
   })
